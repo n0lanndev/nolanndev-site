@@ -1,0 +1,51 @@
+baseURL = 'https://nolanndev.fr'
+languageCode = 'fr-fr'
+title = 'nolanndev | C++ & DevSecOps'
+theme = "hello-friend-ng"
+paginate = 10
+
+[params]
+  # Config visuelle
+  homeSubtitle = "C++ Developer | Game Dev | DevSecOps & Security"
+  primaryColor = "purple"
+  mode = "dark"
+
+  [params.logo]
+    logoText = "nolanndev"
+    logoHomeLink = "/"
+
+  # Tes réseaux sociaux (s'afficheront avec les bonnes icônes)
+  [[params.social]]
+    name = "github"
+    url = "https://github.com/n0lanndev"
+
+  [[params.social]]
+    name = "tiktok"
+    url = "https://www.tiktok.com/@nolannoff"
+
+  [[params.social]]
+    name = "twitch"
+    url = "https://www.twitch.tv/nolanndev"
+
+# Structure du menu
+[[menu.main]]
+  identifier = "lab"
+  name       = "Lab (C++ & Tutos)"
+  url        = "/posts/"
+  weight     = 10
+
+[[menu.main]]
+  identifier = "security"
+  name       = "Sécurité / DevSecOps"
+  url        = "/security/"
+  weight     = 20
+
+[[menu.main]]
+  identifier = "cv"
+  name       = "Mon CV"
+  url        = "/cv.pdf"
+  weight     = 30
+
+[taxonomies]
+    category = "categories"
+    tag      = "tags"
