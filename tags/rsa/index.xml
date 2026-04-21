@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Rsa on nolanndev | C&#43;&#43; &amp; DevSecOps</title>
+    <link>https://nolanndev.fr/tags/rsa/</link>
+    <description>Recent content in Rsa on nolanndev | C&#43;&#43; &amp; DevSecOps</description>
+    <generator>Hugo</generator>
+    <language>fr-fr</language>
+    <lastBuildDate>Thu, 24 Oct 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://nolanndev.fr/tags/rsa/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Recovering an Incomplete RSA Private Key</title>
+      <link>https://nolanndev.fr/security/recovering-rsa/recovering-an-incomplete-rsa-private-key/</link>
+      <pubDate>Thu, 24 Oct 2024 00:00:00 +0000</pubDate>
+      <guid>https://nolanndev.fr/security/recovering-rsa/recovering-an-incomplete-rsa-private-key/</guid>
+      <description>&lt;p&gt;Welcome folks,&lt;/p&gt;&#xA;&lt;p&gt;This writeup is about the Midnight Sun CTF frank challenge on how to recover a full RSA private key, when half of it is erased. Thanks to &lt;a href=&#34;https://blog.cryptohack.org/twitter-secrets&#34;&gt;this recent cryptohack write-up&lt;/a&gt; from which this challenge is (for me) inspired.&#xA;Challenge therefore requires recovering the entire RSA key from this image:&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;img/rsa.png&#34; alt=&#34;image&#34;&gt;&lt;/p&gt;&#xA;&lt;h4 id=&#34;get-the-part-of-the-private-key-visible&#34;&gt;Get the part of the private key visible:&lt;/h4&gt;&#xA;&lt;p&gt;The first step of the challenge is to &lt;strong&gt;recover the visible part&lt;/strong&gt;, to do this I quickly created a small &lt;strong&gt;OCR&lt;/strong&gt; script with the &lt;strong&gt;pytesseract&lt;/strong&gt; module in Python, to facilitate the recovery task.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

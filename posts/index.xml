@@ -1,0 +1,11 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>The Lab on nolanndev | C&#43;&#43; &amp; DevSecOps</title>
+        <link>https://nolanndev.fr/posts/</link>
+        <description>Recent content in The Lab on nolanndev | C&#43;&#43; &amp; DevSecOps</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>fr-fr</language>
+        <atom:link href="https://nolanndev.fr/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+    </channel>
+</rss>

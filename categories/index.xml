@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on nolanndev | C&#43;&#43; &amp; DevSecOps</title>
+    <link>https://nolanndev.fr/categories/</link>
+    <description>Recent content in Categories on nolanndev | C&#43;&#43; &amp; DevSecOps</description>
+    <generator>Hugo</generator>
+    <language>fr-fr</language>
+    <lastBuildDate>Wed, 08 Apr 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://nolanndev.fr/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Cybersécurité</title>
+      <link>https://nolanndev.fr/categories/cybers%C3%A9curit%C3%A9/</link>
+      <pubDate>Wed, 08 Apr 2026 00:00:00 +0000</pubDate>
+      <guid>https://nolanndev.fr/categories/cybers%C3%A9curit%C3%A9/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Recherche</title>
+      <link>https://nolanndev.fr/categories/recherche/</link>
+      <pubDate>Wed, 08 Apr 2026 00:00:00 +0000</pubDate>
+      <guid>https://nolanndev.fr/categories/recherche/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Crypto</title>
+      <link>https://nolanndev.fr/categories/crypto/</link>
+      <pubDate>Thu, 24 Oct 2024 00:00:00 +0000</pubDate>
+      <guid>https://nolanndev.fr/categories/crypto/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>
