@@ -147,7 +147,7 @@ Get the part of the private key visible: The first step of the challenge is to r
                     <p>Welcome folks,</p>
 <p>This writeup is about the Midnight Sun CTF frank challenge on how to recover a full RSA private key, when half of it is erased. Thanks to <a href="https://blog.cryptohack.org/twitter-secrets">this recent cryptohack write-up</a> from which this challenge is (for me) inspired.
 Challenge therefore requires recovering the entire RSA key from this image:</p>
-<p><img src="/img/rsa.png" alt="image"></p>
+<p><img src="/img/recovering-rsa/rsa.png" alt="image"></p>
 <h4 id="get-the-part-of-the-private-key-visible">Get the part of the private key visible:</h4>
 <p>The first step of the challenge is to <strong>recover the visible part</strong>, to do this I quickly created a small <strong>OCR</strong> script with the <strong>pytesseract</strong> module in Python, to facilitate the recovery task.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> pytesseract
@@ -312,7 +312,7 @@ RSAPrivateKey ::= SEQUENCE {
   otherPrimeInfos   OtherPrimeInfos OPTIONAL
 }
 </code></pre><p>According to the previous analysis, we can study the structure and see that its parts are separated by the <strong>02 82 01 01</strong> pattern as it&rsquo;s explained on <a href="https://blog.cryptohack.org/twitter-secrets">cryptohack</a>.</p>
-<p><img src="/img/example.png" alt="image"></p>
+<p><img src="/img/recovering-rsa/example.png" alt="image"></p>
 <p>As cryptohack <a href="https://blog.cryptohack.org/twitter-secrets">says</a> they precisely indicate that <strong>02 82 01 01</strong> corresponds to:</p>
 <blockquote>
 <p>02 for the data type, here Integer.<br>
@@ -320,7 +320,7 @@ RSAPrivateKey ::= SEQUENCE {
 0101, the actual length, which integer value is 257, meaning that the integer value will be encoded in the following 257 bytes. Retrieving the 257 next bytes in Big Endian and taking their integer values yield the rsa values we are looking for.</p>
 </blockquote>
 <p>And bingo precisely after <strong>decoding</strong> our key we get pretty much the same thing:</p>
-<p><img src="/img/key.png" alt="image"></p>
+<p><img src="/img/recovering-rsa/key.png" alt="image"></p>
 <p>So we now know that we have:</p>
 <blockquote>
 <p>End =&gt; q<br>
