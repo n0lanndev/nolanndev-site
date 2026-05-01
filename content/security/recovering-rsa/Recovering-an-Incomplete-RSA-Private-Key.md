@@ -11,7 +11,7 @@ Welcome folks,
 This writeup is about the Midnight Sun CTF frank challenge on how to recover a full RSA private key, when half of it is erased. Thanks to [this recent cryptohack write-up](https://blog.cryptohack.org/twitter-secrets) from which this challenge is (for me) inspired.
 Challenge therefore requires recovering the entire RSA key from this image:
 
-![image](img/rsa.png)
+![image](/img/rsa.png)
 
 #### Get the part of the private key visible:
 
@@ -204,7 +204,7 @@ RSAPrivateKey ::= SEQUENCE {
 
 According to the previous analysis, we can study the structure and see that its parts are separated by the **02 82 01 01** pattern as it's explained on [cryptohack](https://blog.cryptohack.org/twitter-secrets).
 
-![image](img/example.png)
+![image](/img/example.png)
 
 As cryptohack [says](https://blog.cryptohack.org/twitter-secrets) they precisely indicate that **02 82 01 01** corresponds to: 
 
@@ -214,7 +214,7 @@ As cryptohack [says](https://blog.cryptohack.org/twitter-secrets) they precisely
 
 And bingo precisely after **decoding** our key we get pretty much the same thing:  
 
-![image](img/key.png)  
+![image](/img/key.png)  
 
 So we now know that we have:
 >End => q  
