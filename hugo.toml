@@ -14,7 +14,6 @@ paginate = 10
     logoText = "nolanndev"
     logoHomeLink = "/"
 
-  # Tes réseaux sociaux (s'afficheront avec les bonnes icônes)
   [[params.social]]
     name = "github"
     url = "https://github.com/n0lanndev"
@@ -27,7 +26,6 @@ paginate = 10
     name = "twitch"
     url = "https://www.twitch.tv/nolanndev"
 
-# Structure du menu
 [[menu.main]]
   identifier = "lab"
   name       = "Lab (C++ & Tutos)"
