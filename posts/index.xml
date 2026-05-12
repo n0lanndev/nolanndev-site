@@ -18,28 +18,12 @@
 &lt;blockquote&gt;
 &lt;p&gt;Note : Ce contenu est à but purement éducatif. Voir l&amp;rsquo;avertissement complet en &lt;a href=&#34;#disclaimer&#34;&gt;fin d&amp;rsquo;article&lt;/a&gt;.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h1 id=&#34;sommaire&#34;&gt;Sommaire&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&#34;#theorie&#34;&gt;Théorie : Comment Windows lance-t-il un programme ?&lt;/a&gt;
-&lt;a href=&#34;#packer&#34;&gt;Le Packer : Transformer un .exe en données chiffrées.&lt;/a&gt;
-&lt;a href=&#34;#manual-mapping&#34;&gt;Le Manual Mapping : Recréer le chargeur de Windows.&lt;/a&gt;
-&lt;a href=&#34;#relocations&#34;&gt;Les Relocations : étape d’extension&lt;/a&gt;
-&lt;a href=&#34;#imports&#34;&gt;Les Imports : Apprendre à parler avec les DLL système.&lt;/a&gt;
-&lt;a href=&#34;#entrypoint&#34;&gt;Le Point d’entrée : lancement du programme&lt;/a&gt;
-&lt;a href=&#34;#anti-tampering&#34;&gt;Anti-Tampering : Protéger notre code contre l&amp;rsquo;analyse.&lt;/a&gt;
-&lt;a href=&#34;#conclusion&#34;&gt;Conclusion&lt;/a&gt;&lt;/p&gt;</description>
+&lt;h2 id=&#34;theorie&#34;&gt;Théorie : Comment Windows lance-t-il un programme ?&lt;/h2&gt;
+&lt;p&gt;Pour construire un loader, il faut d&amp;rsquo;abord comprendre ce qu&amp;rsquo;est réellement un fichier .exe. Sous Windows, on utilise le format PE (Portable Executable).&lt;/p&gt;</description>
             <content type="html"><![CDATA[<p>Bienvenue dans ce guide. Nous allons apprendre à créer un Packer, un outil capable de chiffrer un programme Windows (.exe) et de le charger directement en mémoire sans qu&rsquo;il ne touche jamais le disque.</p>
 <blockquote>
 <p>Note : Ce contenu est à but purement éducatif. Voir l&rsquo;avertissement complet en <a href="#disclaimer">fin d&rsquo;article</a>.</p>
 </blockquote>
-<h1 id="sommaire">Sommaire</h1>
-<p><a href="#theorie">Théorie : Comment Windows lance-t-il un programme ?</a>
-<a href="#packer">Le Packer : Transformer un .exe en données chiffrées.</a>
-<a href="#manual-mapping">Le Manual Mapping : Recréer le chargeur de Windows.</a>
-<a href="#relocations">Les Relocations : étape d’extension</a>
-<a href="#imports">Les Imports : Apprendre à parler avec les DLL système.</a>
-<a href="#entrypoint">Le Point d’entrée : lancement du programme</a>
-<a href="#anti-tampering">Anti-Tampering : Protéger notre code contre l&rsquo;analyse.</a>
-<a href="#conclusion">Conclusion</a></p>
 <h2 id="theorie">Théorie : Comment Windows lance-t-il un programme ?</h2>
 <p>Pour construire un loader, il faut d&rsquo;abord comprendre ce qu&rsquo;est réellement un fichier .exe. Sous Windows, on utilise le format PE (Portable Executable).</p>
 <p>Un fichier PE n&rsquo;est pas simplement une suite d&rsquo;instructions machine : c&rsquo;est une structure normalisée contenant toutes les informations nécessaires au système pour charger le programme en mémoire, résoudre ses dépendances, appliquer ses protections mémoire et enfin exécuter son point d&rsquo;entrée.</p>
@@ -242,7 +226,6 @@ C&rsquo;est indispensable pour un manual mapping fiable.</p>
 <blockquote>
 <p>Créer un packer revient à réécrire une version miniature du chargeur de Windows.</p>
 </blockquote>
-<p><a href="#sommaire">↑ Retour au sommaire</a></p>
 <h2 id="packer">Le Packer : Transformer un .exe en données chiffrées.</h2>
 <p>Maintenant que nous comprenons la structure d’un fichier PE, nous pouvons passer à la première étape pratique : transformer un exécutable en payload embarqué.</p>
 <p>L’objectif d’un packer est simple :</p>
@@ -358,7 +341,6 @@ Le mot-clé <strong>const</strong> signifie que la variable est en lecture seule
 </code></pre><p>à :</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>payload.h
 </span></span></code></pre></div><p>contenant uniquement des octets chiffrés ainsi que la taille exacte du fichier, prêts à être chargés.</p>
-<p><a href="#sommaire">↑ Retour au sommaire</a></p>
 <h2 id="manual-mapping">Le Manual Mapping : Recréer le chargeur de Windows.</h2>
 <p>Une fois le payload déchiffré et chargé en mémoire, il ne peut toujours pas être exécuté directement.
 Pourquoi ?
@@ -446,7 +428,6 @@ Parce qu’un fichier PE sur disque n’est pas utilisable tel quel en mémoire.
 </span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>memcpy(dest, src, size);
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>Dans une implémentation plus robuste, il faut également prendre en compte VirtualSize, car certaines sections sont plus grandes en mémoire que sur disque.</p>
-<p><a href="#sommaire">↑ Retour au sommaire</a></p>
 <h2 id="relocations">Les Relocations : étape d’extension</h2>
 <p>Les relocations ont déjà été présentées dans la partie théorie : elles servent à corriger les adresses internes du programme lorsque celui-ci n’est pas chargé à son <strong>ImageBase</strong> d’origine.</p>
 <p>Dans une implémentation complète, cette étape repose sur la <strong>Base Relocation Table</strong>, qui contient des blocs d’adresses à ajuster en fonction du delta entre l’ImageBase souhaité et l’adresse réellement allouée en mémoire.</p>
@@ -454,7 +435,6 @@ Parce qu’un fichier PE sur disque n’est pas utilisable tel quel en mémoire.
 <blockquote>
 <p>Cette étape constitue une extension naturelle pour un loader plus robuste et compatible avec davantage de binaires.</p>
 </blockquote>
-<p><a href="#sommaire">↑ Retour au sommaire</a></p>
 <h2 id="imports">Les Imports : Apprendre à parler avec les DLL système.</h2>
 <p>Jusqu’ici, nous avons réussi à reconstruire l’image PE en mémoire et à copier ses sections. Mais un programme Windows ne vit jamais seul : il dépend presque toujours de fonctions externes fournies par les DLL système.</p>
 <p>C’est exactement le rôle de la Import Table : dire au système &ldquo;j’ai besoin de ces fonctions-là pour fonctionner&rdquo;.</p>
@@ -610,7 +590,6 @@ On boucle tant qu’il y a des DLL :</p>
 <li><strong>l’IAT</strong> est entièrement valide</li>
 </ul>
 <p>Le programme peut désormais s’exécuter comme s’il avait été lancé normalement par Windows.</p>
-<p><a href="#sommaire">↑ Retour au sommaire</a></p>
 <h2 id="entrypoint">Le Point d’entrée : lancement du programme</h2>
 <p>Une fois toutes les étapes précédentes terminées :</p>
 <ul>
@@ -639,8 +618,7 @@ On boucle tant qu’il y a des DLL :</p>
 </ul>
 <h4 id="résumé-du-pipeline-complet">Résumé du pipeline complet</h4>
 <pre tabindex="0"><code>Loader -&gt; reconstruction -&gt; imports -&gt; relocations -&gt; EntryPoint -&gt; programme
-</code></pre><p><a href="#sommaire">↑ Retour au sommaire</a></p>
-<h2 id="anti-tampering">Anti-Tampering : Protéger notre code contre l&rsquo;analyse.</h2>
+</code></pre><h2 id="anti-tampering">Anti-Tampering : Protéger notre code contre l&rsquo;analyse.</h2>
 <p>Une fois le programme chargé, nous voulons le protéger contre toute modification en cours d’exécution. Pour cela, notre loader met en place une simple surveillance de l’intégrité mémoire via un <strong>CRC32</strong>. Le principe :</p>
 <h3 id="calcul-du-crc-initial">Calcul du CRC initial</h3>
 <p>Après avoir obtenu baseAlloc, on détermine <strong>sizeOfImage</strong> et on calcule un <strong>CRC32</strong> sur toute l’image :</p>
@@ -776,7 +754,6 @@ On boucle tant qu’il y a des DLL :</p>
 <blockquote>
 <p>Détecter qu’un tiers a modifié ce qui devait rester intact.</p>
 </blockquote>
-<p><a href="#sommaire">↑ Retour au sommaire</a></p>
 <h2 id="conclusion">Conclusion</h2>
 <p>Dans ce projet, nous avons construit pas à pas les fondations d’un chargeur PE minimaliste, en reproduisant manuellement une grande partie du comportement du loader de Windows.</p>
 <p>Même si certaines étapes comme les relocations complètes ou des mécanismes avancés de robustesse n’ont pas été implémentées ici, l’architecture générale d’un manual mapper fonctionnel est désormais en place.</p>
@@ -784,7 +761,6 @@ On boucle tant qu’il y a des DLL :</p>
 <p>Comprendre ces mécanismes permet donc à la fois de mieux appréhender le fonctionnement interne de Windows, mais aussi d’analyser et de détecter des comportements avancés dans des contextes de sécurité.</p>
 <p>Le code complet du projet est disponible ici :
 <a href="https://github.com/n0lanndev/pe-loader-toolkit">https://github.com/n0lanndev/pe-loader-toolkit</a></p>
-<p><a href="#sommaire">↑ Retour au sommaire</a></p>
 <h2 id="disclaimer">⚠️ Avertissement Légal (Disclaimer)</h2>
 <p>Ce cours est partagé à des fins strictement éducatives et dans un but de recherche en cybersécurité. Les techniques présentées (packing, chiffrement, manipulation de binaires) servent à comprendre le fonctionnement interne des systèmes Windows et des mécanismes de défense.</p>
 <ul>
