@@ -19,16 +19,30 @@
 &lt;p&gt;Note : Ce contenu est à but purement éducatif. Voir l&amp;rsquo;avertissement complet en &lt;a href=&#34;#disclaimer&#34;&gt;fin d&amp;rsquo;article&lt;/a&gt;.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2 id=&#34;theorie&#34;&gt;Théorie : Comment Windows lance-t-il un programme ?&lt;/h2&gt;
-&lt;p&gt;Pour construire un loader, il faut d&amp;rsquo;abord comprendre ce qu&amp;rsquo;est réellement un fichier .exe. Sous Windows, on utilise le format PE (Portable Executable).&lt;/p&gt;</description>
+&lt;p&gt;Pour construire un loader, il faut d&amp;rsquo;abord comprendre ce qu&amp;rsquo;est réellement un fichier .exe. Sous Windows, on utilise le format PE (&lt;em&gt;Portable Executable&lt;/em&gt;).&lt;/p&gt;</description>
             <content type="html"><![CDATA[<p>Bienvenue dans ce guide. Nous allons apprendre à créer un Packer, un outil capable de chiffrer un programme Windows (.exe) et de le charger directement en mémoire sans qu&rsquo;il ne touche jamais le disque.</p>
 <blockquote>
 <p>Note : Ce contenu est à but purement éducatif. Voir l&rsquo;avertissement complet en <a href="#disclaimer">fin d&rsquo;article</a>.</p>
 </blockquote>
 <h2 id="theorie">Théorie : Comment Windows lance-t-il un programme ?</h2>
-<p>Pour construire un loader, il faut d&rsquo;abord comprendre ce qu&rsquo;est réellement un fichier .exe. Sous Windows, on utilise le format PE (Portable Executable).</p>
+<p>Pour construire un loader, il faut d&rsquo;abord comprendre ce qu&rsquo;est réellement un fichier .exe. Sous Windows, on utilise le format PE (<em>Portable Executable</em>).</p>
 <p>Un fichier PE n&rsquo;est pas simplement une suite d&rsquo;instructions machine : c&rsquo;est une structure normalisée contenant toutes les informations nécessaires au système pour charger le programme en mémoire, résoudre ses dépendances, appliquer ses protections mémoire et enfin exécuter son point d&rsquo;entrée.</p>
 <p>Pour nous guider, nous allons utiliser la carte de référence absolue : le Dissected PE :</p>
-<!-- raw HTML omitted -->
+
+<figure>
+    <img src="/img/packer/pefile.png"
+          alt="Anatomie d&#39;un fichier PE" 
+         class="left"
+          />
+
+    
+        <figcaption>
+            Figure 1 : Anatomie d&rsquo;un fichier PE<br>
+Source : <a href="https://onlyf8.com/pe-format">https://onlyf8.com/pe-format</a>
+        </figcaption>
+    
+</figure>
+
 <h3 id="vue-densemble--ce-que-fait-windows-quand-on-double-clique-sur-un-exe">Vue d&rsquo;ensemble : ce que fait Windows quand on double-clique sur un .exe</h3>
 <p>Lorsqu&rsquo;un utilisateur lance un programme, Windows ne &ldquo;lit pas juste le fichier puis exécute le code&rdquo;. Il suit en réalité plusieurs étapes précises :</p>
 <ol>
@@ -91,8 +105,8 @@ l’architecture processeur visée par le binaire.</p>
 <p>Champ de flags décrivant la nature du fichier.</p>
 <p>Exemples :</p>
 <ul>
-<li>exécutable (EXE)</li>
-<li>bibliothèque dynamique (DLL)</li>
+<li>exécutable (<em>EXE</em>)</li>
+<li>bibliothèque dynamique (<em>DLL</em>)</li>
 <li>32 bits</li>
 <li>gros fichier sans symboles</li>
 <li>relocs supprimées</li>
@@ -446,11 +460,11 @@ Parce qu’un fichier PE sur disque n’est pas utilisable tel quel en mémoire.
 </span></span></code></pre></div><p>Il ne contient pas directement le code de MessageBoxA.
 À la place, le compilateur laisse une &ldquo;place vide&rdquo; dans une table appelée :</p>
 <ul>
-<li><strong>IAT</strong> (Import Address Table) -&gt; adresses finales des fonctions</li>
-<li><strong>INT</strong> (Import Name Table) -&gt; noms des fonctions utilisées</li>
+<li><strong>IAT</strong> (<em>Import Address Table</em>) -&gt; adresses finales des fonctions</li>
+<li><strong>INT</strong> (<em>Import Name Table</em>) -&gt; noms des fonctions utilisées</li>
 </ul>
 <h4 id="à-quoi-sert-lint-">À quoi sert l’INT ?</h4>
-<p><strong>L’INT</strong> (Import Name Table) sert juste à dire :</p>
+<p><strong>L’INT</strong> (<em>Import Name Table</em>) sert juste à dire :</p>
 <blockquote>
 <p>&ldquo;Voici les noms des fonctions que je veux utiliser&rdquo;</p>
 </blockquote>
@@ -517,12 +531,12 @@ On boucle tant qu’il y a des DLL :</p>
 <p>C’est ici que les choses deviennent importantes.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>IMAGE_THUNK_DATA <span style="color:#f92672">*</span>thunkRef <span style="color:#f92672">=</span> <span style="color:#66d9ef">reinterpret_cast</span><span style="color:#f92672">&lt;</span>IMAGE_THUNK_DATA <span style="color:#f92672">*&gt;</span>(baseAddress <span style="color:#f92672">+</span> importDesc<span style="color:#f92672">-&gt;</span>OriginalFirstThunk);
 </span></span><span style="display:flex;"><span>IMAGE_THUNK_DATA <span style="color:#f92672">*</span>funcRef <span style="color:#f92672">=</span> <span style="color:#66d9ef">reinterpret_cast</span><span style="color:#f92672">&lt;</span>IMAGE_THUNK_DATA <span style="color:#f92672">*&gt;</span>(baseAddress <span style="color:#f92672">+</span> importDesc<span style="color:#f92672">-&gt;</span>FirstThunk);
-</span></span></code></pre></div><p><strong>OriginalFirstThunk</strong> (INT)</p>
+</span></span></code></pre></div><p><strong>OriginalFirstThunk</strong> (<em>INT</em>)</p>
 <ul>
 <li>Contient les noms des fonctions</li>
 <li>Sert uniquement de référence</li>
 </ul>
-<p><strong>FirstThunk</strong> (IAT)</p>
+<p><strong>FirstThunk</strong> (<em>IAT</em>)</p>
 <ul>
 <li>Contient les adresses finales</li>
 <li>C’est ce que le programme utilise réellement à l’exécution</li>
