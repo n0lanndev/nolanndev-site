@@ -1,33 +1,158 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-    <channel>
-        <title>The Lab on nolanndev | C&#43;&#43; &amp; DevSecOps</title>
-        <link>https://nolanndev.fr/posts/</link>
-        <description>Recent content in The Lab on nolanndev | C&#43;&#43; &amp; DevSecOps</description>
-        <generator>Hugo -- gohugo.io</generator>
-        <language>fr-fr</language>
-        <lastBuildDate>Tue, 12 May 2026 00:00:00 +0000</lastBuildDate>
-        <atom:link href="https://nolanndev.fr/posts/index.xml" rel="self" type="application/rss+xml" />
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="Bienvenue dans ce guide. Nous allons apprendre à créer un Packer, un outil capable de chiffrer un programme Windows (.exe) et de le charger directement en mémoire sans qu&rsquo;il ne touche jamais le disque.
+Note : Ce contenu est à but purement éducatif. Voir l&rsquo;avertissement complet en fin d&rsquo;article.
+Sommaire Théorie : Comment Windows lance-t-il un programme ? Le Packer : Transformer un .exe en données chiffrées. Le Manual Mapping : Recréer le chargeur de Windows. Les Relocations : étape d’extension Les Imports : Apprendre à parler avec les DLL système. Le Point d’entrée : lancement du programme Anti-Tampering : Protéger notre code contre l&rsquo;analyse. Conclusion
+" />
+<meta name="keywords" content=", C&#43;&#43;, Windows Internals, Cybersecurity, Reverse Engineering" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="https://nolanndev.fr/posts/packer/packer/" />
+
+
+    <title>
         
-        <item>
-            <title>Construire un Packer &amp; Loader PE de A à Z</title>
-            <link>https://nolanndev.fr/posts/packer/packer/</link>
-            <pubDate>Tue, 12 May 2026 00:00:00 +0000</pubDate>
+            Construire un Packer &amp; Loader PE de A à Z :: nolanndev | C&#43;&#43; &amp; DevSecOps 
+        
+    </title>
+
+
+
+
+
+  <link rel="stylesheet" href="/main.min.7289daf2e88ea2c7b253a51cc5794c7cc17e7aeb7295a19d978db764a5862f25.css" integrity="sha256-cona8uiOoseyU6UcxXlMfMF&#43;eutylaGdl423ZKWGLyU=" crossorigin="anonymous">
+
+
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="">
+
+
+
+  <meta itemprop="name" content="Construire un Packer & Loader PE de A à Z">
+  <meta itemprop="description" content="Bienvenue dans ce guide. Nous allons apprendre à créer un Packer, un outil capable de chiffrer un programme Windows (.exe) et de le charger directement en mémoire sans qu’il ne touche jamais le disque.
+Note : Ce contenu est à but purement éducatif. Voir l’avertissement complet en fin d’article.
+Sommaire Théorie : Comment Windows lance-t-il un programme ? Le Packer : Transformer un .exe en données chiffrées. Le Manual Mapping : Recréer le chargeur de Windows. Les Relocations : étape d’extension Les Imports : Apprendre à parler avec les DLL système. Le Point d’entrée : lancement du programme Anti-Tampering : Protéger notre code contre l’analyse. Conclusion">
+  <meta itemprop="datePublished" content="2026-05-12T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2026-05-12T00:00:00+00:00">
+  <meta itemprop="wordCount" content="4485">
+  <meta itemprop="keywords" content="C&#43;&#43;,Windows Internals,Cybersecurity,Reverse Engineering">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Construire un Packer & Loader PE de A à Z">
+  <meta name="twitter:description" content="Bienvenue dans ce guide. Nous allons apprendre à créer un Packer, un outil capable de chiffrer un programme Windows (.exe) et de le charger directement en mémoire sans qu’il ne touche jamais le disque.
+Note : Ce contenu est à but purement éducatif. Voir l’avertissement complet en fin d’article.
+Sommaire Théorie : Comment Windows lance-t-il un programme ? Le Packer : Transformer un .exe en données chiffrées. Le Manual Mapping : Recréer le chargeur de Windows. Les Relocations : étape d’extension Les Imports : Apprendre à parler avec les DLL système. Le Point d’entrée : lancement du programme Anti-Tampering : Protéger notre code contre l’analyse. Conclusion">
+
+
+
+
+
+    <meta property="article:section" content="Système" />
+
+    <meta property="article:section" content="Sécurité" />
+
+
+
+    <meta property="article:published_time" content="2026-05-12 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+
+
+
+
+    </head>
+
+    
+        <body>
+    
+    
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text ">
+                nolanndev</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+                <nav class="menu">
+    <ul class="menu__inner">
+                <li><a href="/cv.pdf">Mon CV</a></li>
             
-            <guid>https://nolanndev.fr/posts/packer/packer/</guid>
-            <description>&lt;p&gt;Bienvenue dans ce guide. Nous allons apprendre à créer un Packer, un outil capable de chiffrer un programme Windows (.exe) et de le charger directement en mémoire sans qu&amp;rsquo;il ne touche jamais le disque.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Note : Ce contenu est à but purement éducatif. Voir l&amp;rsquo;avertissement complet en &lt;a href=&#34;#disclaimer&#34;&gt;fin d&amp;rsquo;article&lt;/a&gt;.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h1 id=&#34;sommaire&#34;&gt;Sommaire&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&#34;#theorie&#34;&gt;Théorie : Comment Windows lance-t-il un programme ?&lt;/a&gt;
-&lt;a href=&#34;#packer&#34;&gt;Le Packer : Transformer un .exe en données chiffrées.&lt;/a&gt;
-&lt;a href=&#34;#manual-mapping&#34;&gt;Le Manual Mapping : Recréer le chargeur de Windows.&lt;/a&gt;
-&lt;a href=&#34;#relocations&#34;&gt;Les Relocations : étape d’extension&lt;/a&gt;
-&lt;a href=&#34;#imports&#34;&gt;Les Imports : Apprendre à parler avec les DLL système.&lt;/a&gt;
-&lt;a href=&#34;#entrypoint&#34;&gt;Le Point d’entrée : lancement du programme&lt;/a&gt;
-&lt;a href=&#34;#anti-tampering&#34;&gt;Anti-Tampering : Protéger notre code contre l&amp;rsquo;analyse.&lt;/a&gt;
-&lt;a href=&#34;#conclusion&#34;&gt;Conclusion&lt;/a&gt;&lt;/p&gt;</description>
-            <content type="html"><![CDATA[<p>Bienvenue dans ce guide. Nous allons apprendre à créer un Packer, un outil capable de chiffrer un programme Windows (.exe) et de le charger directement en mémoire sans qu&rsquo;il ne touche jamais le disque.</p>
+                <li><a href="/posts/">Lab (C&#43;&#43; &amp; Tutos)</a></li>
+            
+                <li><a href="/security/">Sécurité / DevSecOps</a></li>
+            
+    </ul>
+</nav>
+
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+        </span>
+    </span>
+</header>
+
+
+            
+  <div class="content">
+    <main class="post">
+
+      <div class="post-info">
+        <p>
+
+          
+        </p>
+      </div>
+
+      <article>
+        <h1 class="post-title">
+          <a href="https://nolanndev.fr/posts/packer/packer/">Construire un Packer &amp; Loader PE de A à Z</a>
+        </h1>
+
+        
+
+        
+
+        
+
+        <div class="post-content">
+          <p>Bienvenue dans ce guide. Nous allons apprendre à créer un Packer, un outil capable de chiffrer un programme Windows (.exe) et de le charger directement en mémoire sans qu&rsquo;il ne touche jamais le disque.</p>
 <blockquote>
 <p>Note : Ce contenu est à but purement éducatif. Voir l&rsquo;avertissement complet en <a href="#disclaimer">fin d&rsquo;article</a>.</p>
 </blockquote>
@@ -792,8 +917,91 @@ On boucle tant qu’il y a des DLL :</p>
 <li><strong>Responsabilité</strong> : L&rsquo;auteur décline toute responsabilité en cas de mauvaise utilisation de ces informations ou de dommages causés par une utilisation en dehors d&rsquo;un cadre légal et éthique.</li>
 <li><strong>Éthique</strong> : Le savoir est une arme ; utilisez-la pour construire des systèmes plus sûrs, pas pour nuire.</li>
 </ul>
-]]></content>
-        </item>
+
+        </div>
+      </article>
+
+      <hr />
+
+      <div class="post-info">
         
-    </channel>
-</rss>
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+
+        <span class="tag"><a href="https://nolanndev.fr/tags/c&#43;&#43;/">C&#43;&#43;</a></span>
+        <span class="tag"><a href="https://nolanndev.fr/tags/windows-internals/">Windows Internals</a></span>
+        <span class="tag"><a href="https://nolanndev.fr/tags/cybersecurity/">Cybersecurity</a></span>
+        <span class="tag"><a href="https://nolanndev.fr/tags/reverse-engineering/">Reverse Engineering</a></span>
+        
+    </p>
+
+        
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder meta-icon"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+
+        <span class="tag"><a href="https://nolanndev.fr/categories/syst%C3%A8me/">Système</a></span>
+        <span class="tag"><a href="https://nolanndev.fr/categories/s%C3%A9curit%C3%A9/">Sécurité</a></span>
+        
+    </p>
+
+
+        <p>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+            <polyline points="10 9 9 9 8 9"></polyline>
+          </svg>
+          4485 Words
+        </p>
+
+        <p>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+          
+            2026-05-12 00:00
+          
+
+           
+            
+          
+        </p>
+      </div>
+
+      
+
+      
+
+      
+
+      
+
+    </main>
+  </div>
+
+
+            
+                <footer class="footer">
+    
+    
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+<script type="text/javascript" src="/bundle.min.08b680078a3cf9c69e3dd217a5aa52cfddd4a1d850f8cdff127fdd7421a71f8b2b474be69386f67819edace92273916e7230c9054f38107db9dc6730b3530ab5.js" integrity="sha512-CLaAB4o8&#43;caePdIXpapSz93UodhQ&#43;M3/En/ddCGnH4srR0vmk4b2eBntrOkic5FucjDJBU84EH253Gcws1MKtQ=="></script>
+
+
+
+
+    </body>
+</html>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Système on nolanndev | C&#43;&#43; &amp; DevSecOps</title>
+    <link>https://nolanndev.fr/categories/syst%C3%A8me/</link>
+    <description>Recent content in Système on nolanndev | C&#43;&#43; &amp; DevSecOps</description>
+    <generator>Hugo</generator>
+    <language>fr-fr</language>
+    <lastBuildDate>Tue, 12 May 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://nolanndev.fr/categories/syst%C3%A8me/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Construire un Packer &amp; Loader PE de A à Z</title>
+      <link>https://nolanndev.fr/posts/packer/packer/</link>
+      <pubDate>Tue, 12 May 2026 00:00:00 +0000</pubDate>
+      <guid>https://nolanndev.fr/posts/packer/packer/</guid>
+      <description>&lt;p&gt;Bienvenue dans ce guide. Nous allons apprendre à créer un Packer, un outil capable de chiffrer un programme Windows (.exe) et de le charger directement en mémoire sans qu&amp;rsquo;il ne touche jamais le disque.&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;Note : Ce contenu est à but purement éducatif. Voir l&amp;rsquo;avertissement complet en &lt;a href=&#34;#disclaimer&#34;&gt;fin d&amp;rsquo;article&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;h1 id=&#34;sommaire&#34;&gt;Sommaire&lt;/h1&gt;&#xA;&lt;p&gt;&lt;a href=&#34;#theorie&#34;&gt;Théorie : Comment Windows lance-t-il un programme ?&lt;/a&gt;&#xA;&lt;a href=&#34;#packer&#34;&gt;Le Packer : Transformer un .exe en données chiffrées.&lt;/a&gt;&#xA;&lt;a href=&#34;#manual-mapping&#34;&gt;Le Manual Mapping : Recréer le chargeur de Windows.&lt;/a&gt;&#xA;&lt;a href=&#34;#relocations&#34;&gt;Les Relocations : étape d’extension&lt;/a&gt;&#xA;&lt;a href=&#34;#imports&#34;&gt;Les Imports : Apprendre à parler avec les DLL système.&lt;/a&gt;&#xA;&lt;a href=&#34;#entrypoint&#34;&gt;Le Point d’entrée : lancement du programme&lt;/a&gt;&#xA;&lt;a href=&#34;#anti-tampering&#34;&gt;Anti-Tampering : Protéger notre code contre l&amp;rsquo;analyse.&lt;/a&gt;&#xA;&lt;a href=&#34;#conclusion&#34;&gt;Conclusion&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
