@@ -11,20 +11,16 @@ Bienvenue dans ce guide. Nous allons apprendre à créer un Packer, un outil cap
 
 ## Théorie : Comment Windows lance-t-il un programme ? {#theorie}
 
-Pour construire un loader, il faut d'abord comprendre ce qu'est réellement un fichier .exe. Sous Windows, on utilise le format PE (Portable Executable).
+Pour construire un loader, il faut d'abord comprendre ce qu'est réellement un fichier .exe. Sous Windows, on utilise le format PE (*Portable Executable*).
 
 Un fichier PE n'est pas simplement une suite d'instructions machine : c'est une structure normalisée contenant toutes les informations nécessaires au système pour charger le programme en mémoire, résoudre ses dépendances, appliquer ses protections mémoire et enfin exécuter son point d'entrée.
 
 Pour nous guider, nous allons utiliser la carte de référence absolue : le Dissected PE :
 
-<figure>
-  <img src="/img/packer/pefile.png" alt="Anatomie d'un fichier PE" />
-  <figcaption align="center">
-    <b>Figure 1 :</b> L'anatomie d'un fichier PE 
-    <br />
-    <small>Source : <a href="https://onlyf8.com/pe-format">https://onlyf8.com/pe-format</a></small>
-  </figcaption>
-</figure>
+{{< image src="/img/packer/pefile.png" alt="Anatomie d'un fichier PE" >}}
+Figure 1 : Anatomie d'un fichier PE  
+Source : https://onlyf8.com/pe-format
+{{< /image >}}
 
 ### Vue d'ensemble : ce que fait Windows quand on double-clique sur un .exe
 
@@ -128,8 +124,8 @@ Champ de flags décrivant la nature du fichier.
 
 Exemples :
 
-* exécutable (EXE)
-* bibliothèque dynamique (DLL)
+* exécutable (*EXE*)
+* bibliothèque dynamique (*DLL*)
 * 32 bits
 * gros fichier sans symboles
 * relocs supprimées
@@ -580,12 +576,12 @@ MessageBoxA(NULL, "Hello", "Test", 0);
 ```
 Il ne contient pas directement le code de MessageBoxA.
 À la place, le compilateur laisse une "place vide" dans une table appelée :
-* **IAT** (Import Address Table) -> adresses finales des fonctions
-* **INT** (Import Name Table) -> noms des fonctions utilisées
+* **IAT** (*Import Address Table*) -> adresses finales des fonctions
+* **INT** (*Import Name Table*) -> noms des fonctions utilisées
 
 #### À quoi sert l’INT ?
 
-**L’INT** (Import Name Table) sert juste à dire :
+**L’INT** (*Import Name Table*) sert juste à dire :
 > "Voici les noms des fonctions que je veux utiliser"
 
 Exemples :
@@ -667,11 +663,11 @@ C’est ici que les choses deviennent importantes.
 IMAGE_THUNK_DATA *thunkRef = reinterpret_cast<IMAGE_THUNK_DATA *>(baseAddress + importDesc->OriginalFirstThunk);
 IMAGE_THUNK_DATA *funcRef = reinterpret_cast<IMAGE_THUNK_DATA *>(baseAddress + importDesc->FirstThunk);
 ```
-**OriginalFirstThunk** (INT)
+**OriginalFirstThunk** (*INT*)
 * Contient les noms des fonctions
 * Sert uniquement de référence
 
-**FirstThunk** (IAT)
+**FirstThunk** (*IAT*)
 * Contient les adresses finales
 * C’est ce que le programme utilise réellement à l’exécution
 
