@@ -3,20 +3,11 @@ title: Construire un Packer & Loader PE de A à Z
 date: 2026-05-12
 tags: ["C++", "Windows Internals", "Cybersecurity", "Reverse Engineering"]
 categories: ["Système", "Sécurité"]
-showToc: true
+toc: true
 ---
 
 Bienvenue dans ce guide. Nous allons apprendre à créer un Packer, un outil capable de chiffrer un programme Windows (.exe) et de le charger directement en mémoire sans qu'il ne touche jamais le disque.
 > Note : Ce contenu est à but purement éducatif. Voir l'avertissement complet en [fin d'article](#disclaimer).
-# Sommaire {#sommaire}
-[Théorie : Comment Windows lance-t-il un programme ?](#theorie)
-[Le Packer : Transformer un .exe en données chiffrées.](#packer)
-[Le Manual Mapping : Recréer le chargeur de Windows.](#manual-mapping)
-[Les Relocations : étape d’extension](#relocations)
-[Les Imports : Apprendre à parler avec les DLL système.](#imports)
-[Le Point d’entrée : lancement du programme](#entrypoint)
-[Anti-Tampering : Protéger notre code contre l'analyse.](#anti-tampering)
-[Conclusion](#conclusion)
 
 ## Théorie : Comment Windows lance-t-il un programme ? {#theorie}
 
@@ -27,7 +18,7 @@ Un fichier PE n'est pas simplement une suite d'instructions machine : c'est une 
 Pour nous guider, nous allons utiliser la carte de référence absolue : le Dissected PE :
 
 <figure>
-  <img src="img/packer/pefile.png" alt="Anatomie d'un fichier PE" />
+  <img src="/img/packer/pefile.png" alt="Anatomie d'un fichier PE" />
   <figcaption align="center">
     <b>Figure 1 :</b> L'anatomie d'un fichier PE 
     <br />
@@ -331,8 +322,6 @@ Ensuite un stub/loader doit :
 Autrement dit :
 > Créer un packer revient à réécrire une version miniature du chargeur de Windows.
 
-[↑ Retour au sommaire](#sommaire)
-
 ## Le Packer : Transformer un .exe en données chiffrées. {#packer}
 
 Maintenant que nous comprenons la structure d’un fichier PE, nous pouvons passer à la première étape pratique : transformer un exécutable en payload embarqué.
@@ -454,8 +443,6 @@ payload.h
 ```
 contenant uniquement des octets chiffrés ainsi que la taille exacte du fichier, prêts à être chargés.
 
-[↑ Retour au sommaire](#sommaire)
-
 ## Le Manual Mapping : Recréer le chargeur de Windows. {#manual-mapping}
 Une fois le payload déchiffré et chargé en mémoire, il ne peut toujours pas être exécuté directement.
 Pourquoi ?
@@ -567,8 +554,6 @@ for (WORD i = 0; i < ntHeaders->FileHeader.NumberOfSections; i++)
 ```
 Dans une implémentation plus robuste, il faut également prendre en compte VirtualSize, car certaines sections sont plus grandes en mémoire que sur disque.
 
-[↑ Retour au sommaire](#sommaire)
-
 ## Les Relocations : étape d’extension {#relocations}
 
 Les relocations ont déjà été présentées dans la partie théorie : elles servent à corriger les adresses internes du programme lorsque celui-ci n’est pas chargé à son **ImageBase** d’origine.
@@ -578,8 +563,6 @@ Dans une implémentation complète, cette étape repose sur la **Base Relocation
 Dans notre cas, cette partie est volontairement laissée hors du périmètre de ce loader afin de garder une architecture simple et centrée sur les mécanismes principaux (mapping, imports, exécution).
 
 > Cette étape constitue une extension naturelle pour un loader plus robuste et compatible avec davantage de binaires.
-
-[↑ Retour au sommaire](#sommaire)
 
 ## Les Imports : Apprendre à parler avec les DLL système. {#imports}
 Jusqu’ici, nous avons réussi à reconstruire l’image PE en mémoire et à copier ses sections. Mais un programme Windows ne vit jamais seul : il dépend presque toujours de fonctions externes fournies par les DLL système.
@@ -780,8 +763,6 @@ return true;
 
 Le programme peut désormais s’exécuter comme s’il avait été lancé normalement par Windows.
 
-[↑ Retour au sommaire](#sommaire)
-
 ## Le Point d’entrée : lancement du programme {#entrypoint}
 
 Une fois toutes les étapes précédentes terminées :
@@ -821,8 +802,6 @@ Dans un loader manuel, le rôle final est simplement de :
 ```
 Loader -> reconstruction -> imports -> relocations -> EntryPoint -> programme
 ```
-
-[↑ Retour au sommaire](#sommaire)
 
 ## Anti-Tampering : Protéger notre code contre l'analyse. {#anti-tampering}
 
@@ -1002,8 +981,6 @@ Pour aller plus loin :
 Mais la base reste toujours la même :
 > Détecter qu’un tiers a modifié ce qui devait rester intact.
 
-[↑ Retour au sommaire](#sommaire)
-
 ## Conclusion {#conclusion}
 
 Dans ce projet, nous avons construit pas à pas les fondations d’un chargeur PE minimaliste, en reproduisant manuellement une grande partie du comportement du loader de Windows.
@@ -1016,8 +993,6 @@ Comprendre ces mécanismes permet donc à la fois de mieux appréhender le fonct
 
 Le code complet du projet est disponible ici :
 https://github.com/n0lanndev/pe-loader-toolkit
-
-[↑ Retour au sommaire](#sommaire)
 
 ## ⚠️ Avertissement Légal (Disclaimer) {#disclaimer}
 

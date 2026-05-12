@@ -3,7 +3,7 @@ title: "État de l'art : Cybersécurité des microservices conteneurisés pour l
 date: 2026-04-08
 tags: ["DevSecOps", "Docker", "Kubernetes", "Trivy", "Falco", "Vault"]
 categories: ["Recherche", "Cybersécurité"]
-showToc: true
+toc: true
 ---
 
 ## TL;DR
