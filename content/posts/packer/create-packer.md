@@ -990,11 +990,11 @@ Comprendre ces mécanismes permet donc à la fois de mieux appréhender le fonct
 Le code complet du projet est disponible ici :
 https://github.com/n0lanndev/pe-loader-toolkit
 
+nolanndev
+
 ## ⚠️ Avertissement Légal (Disclaimer) {#disclaimer}
 
 Ce cours est partagé à des fins strictement éducatives et dans un but de recherche en cybersécurité. Les techniques présentées (packing, chiffrement, manipulation de binaires) servent à comprendre le fonctionnement interne des systèmes Windows et des mécanismes de défense.
 * **Usage responsable** : Ne testez jamais ces concepts sur un ordinateur ou un réseau qui ne vous appartient pas.
 * **Responsabilité** : L'auteur décline toute responsabilité en cas de mauvaise utilisation de ces informations ou de dommages causés par une utilisation en dehors d'un cadre légal et éthique.
 * **Éthique** : Le savoir est une arme ; utilisez-la pour construire des systèmes plus sûrs, pas pour nuire.
-
-nolanndev
