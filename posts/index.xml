@@ -775,6 +775,7 @@ On boucle tant qu’il y a des DLL :</p>
 <p>Comprendre ces mécanismes permet donc à la fois de mieux appréhender le fonctionnement interne de Windows, mais aussi d’analyser et de détecter des comportements avancés dans des contextes de sécurité.</p>
 <p>Le code complet du projet est disponible ici :
 <a href="https://github.com/n0lanndev/pe-loader-toolkit">https://github.com/n0lanndev/pe-loader-toolkit</a></p>
+<p>nolanndev</p>
 <h2 id="disclaimer">⚠️ Avertissement Légal (Disclaimer)</h2>
 <p>Ce cours est partagé à des fins strictement éducatives et dans un but de recherche en cybersécurité. Les techniques présentées (packing, chiffrement, manipulation de binaires) servent à comprendre le fonctionnement interne des systèmes Windows et des mécanismes de défense.</p>
 <ul>
@@ -782,7 +783,6 @@ On boucle tant qu’il y a des DLL :</p>
 <li><strong>Responsabilité</strong> : L&rsquo;auteur décline toute responsabilité en cas de mauvaise utilisation de ces informations ou de dommages causés par une utilisation en dehors d&rsquo;un cadre légal et éthique.</li>
 <li><strong>Éthique</strong> : Le savoir est une arme ; utilisez-la pour construire des systèmes plus sûrs, pas pour nuire.</li>
 </ul>
-<p>nolanndev</p>
 ]]></content>
         </item>
         
