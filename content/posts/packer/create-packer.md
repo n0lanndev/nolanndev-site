@@ -39,11 +39,11 @@ Lorsqu'un utilisateur lance un programme, Windows ne "lit pas juste le fichier p
 
 L'image montre qu'un exécutable Windows est divisé en plusieurs blocs logiques :
 
-**Headers** : métadonnées décrivant le programme
-**Sections** : contenu réel (code, données, ressources...)
-**Imports** : fonctions externes utilisées
-**Relocations** : ajustements d'adresses mémoire
-**Entry Point** : première instruction exécutée
+* **Headers** : métadonnées décrivant le programme
+* **Sections** : contenu réel (code, données, ressources...)
+* **Imports** : fonctions externes utilisées
+* **Relocations** : ajustements d'adresses mémoire
+* **Entry Point** : première instruction exécutée
 
 Voyons cela proprement.
 
