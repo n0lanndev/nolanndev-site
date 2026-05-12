@@ -66,10 +66,10 @@ Source : <a href="https://onlyf8.com/pe-format">https://onlyf8.com/pe-format</a>
 <p>Voyons cela proprement.</p>
 <h3 id="1-le-dos-header-">1. Le DOS Header :</h3>
 <p>Tout fichier PE commence par deux octets célèbres :</p>
-<pre tabindex="0"><code>4D 5A
-</code></pre><p>Ce sont les caractères :</p>
-<pre tabindex="0"><code>MZ
-</code></pre><p>Signature historique des exécutables MS-DOS.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#ae81ff">4</span>D <span style="color:#ae81ff">5</span>A
+</span></span></code></pre></div><p>Ce sont les caractères :</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>MZ
+</span></span></code></pre></div><p>Signature historique des exécutables MS-DOS.</p>
 <p>Le champ le plus important ici est :</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>e_lfanew
 </span></span></code></pre></div><p>Il contient l&rsquo;offset du vrai header PE dans le fichier.</p>
@@ -79,10 +79,10 @@ Source : <a href="https://onlyf8.com/pe-format">https://onlyf8.com/pe-format</a>
 </blockquote>
 <h3 id="2-le-pe-header--identité-du-programme">2. Le PE Header : identité du programme</h3>
 <p>À l&rsquo;offset indiqué par e_lfanew, on trouve :</p>
-<pre tabindex="0"><code>50 45 00 00
-</code></pre><p>Soit :</p>
-<pre tabindex="0"><code>PE\0\0
-</code></pre><p>C&rsquo;est la signature officielle du format Portable Executable.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#ae81ff">50</span> <span style="color:#ae81ff">45</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span>
+</span></span></code></pre></div><p>Soit :</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>PE<span style="color:#960050;background-color:#1e0010">\</span><span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">\</span><span style="color:#ae81ff">0</span>
+</span></span></code></pre></div><p>C&rsquo;est la signature officielle du format Portable Executable.</p>
 <p>Ensuite viennent plusieurs champs importants :</p>
 <h4 id="machine">Machine</h4>
 <p>Malgré son nom, ce champ ne désigne pas &ldquo;l’ordinateur&rdquo;, mais
@@ -96,12 +96,12 @@ l’architecture processeur visée par le binaire.</p>
 <p>Nombre de sections présentes (.text, .data, etc.)</p>
 <h4 id="sizeofoptionalheader">SizeOfOptionalHeader</h4>
 <p>Taille, en octets, du header suivant :</p>
-<pre tabindex="0"><code>IMAGE_OPTIONAL_HEADER
-</code></pre><p>Ce champ permet à Windows de savoir où commence la table des sections juste après.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>IMAGE_OPTIONAL_HEADER
+</span></span></code></pre></div><p>Ce champ permet à Windows de savoir où commence la table des sections juste après.</p>
 <p>Valeurs classiques :</p>
-<pre tabindex="0"><code>0xE0 -&gt; PE32
-0xF0 -&gt; PE32+ (x64)
-</code></pre><h4 id="characteristics">Characteristics</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#ae81ff">0xE0</span> <span style="color:#f92672">-&gt;</span> PE32
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0xF0</span> <span style="color:#f92672">-&gt;</span> PE32<span style="color:#f92672">+</span> (x64)
+</span></span></code></pre></div><h4 id="characteristics">Characteristics</h4>
 <p>Champ de flags décrivant la nature du fichier.</p>
 <p>Exemples :</p>
 <ul>
@@ -155,15 +155,15 @@ l’architecture processeur visée par le binaire.</p>
 <h4 id="text">.text</h4>
 <p>Contient le code machine du programme.</p>
 <p>Permissions :</p>
-<pre tabindex="0"><code>READ + EXECUTE
-</code></pre><p>C&rsquo;est ici que se trouvent les instructions CPU.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>READ <span style="color:#f92672">+</span> EXECUTE
+</span></span></code></pre></div><p>C&rsquo;est ici que se trouvent les instructions CPU.</p>
 <h4 id="data">.data</h4>
 <p>Variables globales modifiables :</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> compteur <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">char</span> flag <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
 </span></span></code></pre></div><p>Permissions :</p>
-<pre tabindex="0"><code>READ + WRITE
-</code></pre><h4 id="rdata">.rdata</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>READ <span style="color:#f92672">+</span> WRITE
+</span></span></code></pre></div><h4 id="rdata">.rdata</h4>
 <p>Données constantes :</p>
 <ul>
 <li>chaînes statiques</li>
@@ -171,8 +171,8 @@ l’architecture processeur visée par le binaire.</p>
 <li>imports parfois</li>
 </ul>
 <p>Permissions :</p>
-<pre tabindex="0"><code>READ ONLY
-</code></pre><h4 id="rsrc">.rsrc</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>READ ONLY
+</span></span></code></pre></div><h4 id="rsrc">.rsrc</h4>
 <p>Icônes, menus, version info, manifestes.</p>
 <h4 id="reloc">.reloc</h4>
 <p>Table des relocations.</p>
@@ -198,11 +198,11 @@ l’architecture processeur visée par le binaire.</p>
 <p>Notre futur loader devra refaire cela lui-même.</p>
 <h3 id="les-relocations--déplacer-le-programme">Les Relocations : déplacer le programme</h3>
 <p>Supposons que le binaire souhaite être chargé ici :</p>
-<pre tabindex="0"><code>0x140000000
-</code></pre><p>Mais cette zone mémoire est déjà occupée.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#ae81ff">0x140000000</span>
+</span></span></code></pre></div><p>Mais cette zone mémoire est déjà occupée.</p>
 <p>Windows le charge ailleurs :</p>
-<pre tabindex="0"><code>0x7FF600000000
-</code></pre><p>Certaines adresses codées en dur deviennent fausses.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#ae81ff">0x7FF600000000</span>
+</span></span></code></pre></div><p>Certaines adresses codées en dur deviennent fausses.
 Le loader parcourt alors .reloc et corrige automatiquement les pointeurs.
 C&rsquo;est indispensable pour un manual mapping fiable.</p>
 <h3 id="le-point-dentrée--naissance-du-processus">Le Point d&rsquo;entrée : naissance du processus</h3>
@@ -351,8 +351,8 @@ Le mot-clé <strong>const</strong> signifie que la variable est en lecture seule
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;payload.h&#34;</span><span style="color:#75715e">
 </span></span></span></code></pre></div><h4 id="résultat-final">Résultat final</h4>
 <p>Nous passons donc de par exemple:</p>
-<pre tabindex="0"><code>calc.exe
-</code></pre><p>à :</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>calc.exe
+</span></span></code></pre></div><p>à :</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>payload.h
 </span></span></code></pre></div><p>contenant uniquement des octets chiffrés ainsi que la taille exacte du fichier, prêts à être chargés.</p>
 <h2 id="manual-mapping">Le Manual Mapping : Recréer le chargeur de Windows.</h2>
@@ -561,10 +561,10 @@ On boucle tant qu’il y a des DLL :</p>
 </span></span></code></pre></div><p>Elle contient simplement :</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>importByName<span style="color:#f92672">-&gt;</span>Name
 </span></span></code></pre></div><p>Exemple :</p>
-<pre tabindex="0"><code>&#34;CreateFileA&#34;
-&#34;VirtualAlloc&#34;
-&#34;MessageBoxA&#34;
-</code></pre><h4 id="2-résolution-de-ladresse-réelle">2. Résolution de l’adresse réelle</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#e6db74">&#34;CreateFileA&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;VirtualAlloc&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;MessageBoxA&#34;</span>
+</span></span></code></pre></div><h4 id="2-résolution-de-ladresse-réelle">2. Résolution de l’adresse réelle</h4>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>FARPROC <span style="color:#f92672">*</span>funcAddr <span style="color:#f92672">=</span> <span style="color:#66d9ef">reinterpret_cast</span><span style="color:#f92672">&lt;</span>FARPROC <span style="color:#f92672">*&gt;</span>(<span style="color:#f92672">&amp;</span>funcRef<span style="color:#f92672">-&gt;</span>u1.Function);
 </span></span><span style="display:flex;"><span><span style="color:#f92672">*</span>funcAddr <span style="color:#f92672">=</span> GetProcAddress(hMod, importByName<span style="color:#f92672">-&gt;</span>Name);
 </span></span></code></pre></div><p>Ici on fait le cœur du loader :</p>
@@ -619,8 +619,8 @@ On boucle tant qu’il y a des DLL :</p>
 <h3 id="ce-que-ça-signifie">Ce que ça signifie</h3>
 <p>Contrairement à une idée simple, un programme Windows ne démarre pas directement sur <strong>main()</strong>.</p>
 <p>Le flux réel est :</p>
-<pre tabindex="0"><code>EntryPoint -&gt; runtime C/C++ -&gt; mainCRTStartup -&gt; main()
-</code></pre><h4 id="rôle-du-loader">Rôle du loader</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>EntryPoint <span style="color:#f92672">-&gt;</span> runtime C<span style="color:#f92672">/</span>C<span style="color:#f92672">++</span> <span style="color:#f92672">-&gt;</span> mainCRTStartup <span style="color:#f92672">-&gt;</span> main()
+</span></span></code></pre></div><h4 id="rôle-du-loader">Rôle du loader</h4>
 <p>Dans un loader manuel, le rôle final est simplement de :</p>
 <blockquote>
 <p>transférer l’exécution vers cet EntryPoint</p>
@@ -631,8 +631,8 @@ On boucle tant qu’il y a des DLL :</p>
 <li>il s’exécute comme s’il avait été lancé normalement</li>
 </ul>
 <h4 id="résumé-du-pipeline-complet">Résumé du pipeline complet</h4>
-<pre tabindex="0"><code>Loader -&gt; reconstruction -&gt; imports -&gt; relocations -&gt; EntryPoint -&gt; programme
-</code></pre><h2 id="anti-tampering">Anti-Tampering : Protéger notre code contre l&rsquo;analyse.</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Loader <span style="color:#f92672">-&gt;</span> reconstruction <span style="color:#f92672">-&gt;</span> imports <span style="color:#f92672">-&gt;</span> relocations <span style="color:#f92672">-&gt;</span> EntryPoint <span style="color:#f92672">-&gt;</span> programme
+</span></span></code></pre></div><h2 id="anti-tampering">Anti-Tampering : Protéger notre code contre l&rsquo;analyse.</h2>
 <p>Une fois le programme chargé, nous voulons le protéger contre toute modification en cours d’exécution. Pour cela, notre loader met en place une simple surveillance de l’intégrité mémoire via un <strong>CRC32</strong>. Le principe :</p>
 <h3 id="calcul-du-crc-initial">Calcul du CRC initial</h3>
 <p>Après avoir obtenu baseAlloc, on détermine <strong>sizeOfImage</strong> et on calcule un <strong>CRC32</strong> sur toute l’image :</p>
@@ -652,8 +652,8 @@ On boucle tant qu’il y a des DLL :</p>
 <h3 id="thread-de-surveillance">Thread de surveillance</h3>
 <h4 id="pourquoi-crc32-">Pourquoi CRC32 ?</h4>
 <p><strong>CRC32</strong> signifie :</p>
-<pre tabindex="0"><code>Cyclic Redundancy Check 32 bits
-</code></pre><p>C’est un algorithme très rapide qui transforme un bloc mémoire en une valeur de <strong>32 bits</strong>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Cyclic Redundancy Check <span style="color:#ae81ff">32</span> bits
+</span></span></code></pre></div><p>C’est un algorithme très rapide qui transforme un bloc mémoire en une valeur de <strong>32 bits</strong>.</p>
 <p>Exemple :</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Zone mémoire A <span style="color:#f92672">-&gt;</span> <span style="color:#ae81ff">0x91AF22BC</span>
 </span></span></code></pre></div><p>Si un seul octet change :</p>
