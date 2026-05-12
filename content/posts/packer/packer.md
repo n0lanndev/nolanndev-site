@@ -50,11 +50,11 @@ Voyons cela proprement.
 ### 1. Le DOS Header :
 
 Tout fichier PE commence par deux octets célèbres :
-```
+```cpp
 4D 5A
 ```
 Ce sont les caractères :
-```
+```cpp
 MZ
 ```
 Signature historique des exécutables MS-DOS.
@@ -74,13 +74,13 @@ En clair :
 
 À l'offset indiqué par e_lfanew, on trouve :
 
-```
+```cpp
 50 45 00 00
 ```
 
 Soit :
 
-```
+```cpp
 PE\0\0
 ```
 
@@ -105,7 +105,7 @@ Nombre de sections présentes (.text, .data, etc.)
 
 Taille, en octets, du header suivant :
 
-```
+```cpp
 IMAGE_OPTIONAL_HEADER
 ```
 
@@ -113,7 +113,7 @@ Ce champ permet à Windows de savoir où commence la table des sections juste ap
 
 Valeurs classiques :
 
-```
+```cpp
 0xE0 -> PE32
 0xF0 -> PE32+ (x64)
 ```
@@ -192,7 +192,7 @@ Les plus courantes :
 Contient le code machine du programme.
 
 Permissions :
-```
+```cpp
 READ + EXECUTE
 ```
 C'est ici que se trouvent les instructions CPU.
@@ -205,7 +205,7 @@ int compteur = 0;
 char flag = 1;
 ```
 Permissions :
-```
+```cpp
 READ + WRITE
 ```
 #### .rdata
@@ -217,7 +217,7 @@ Données constantes :
 - imports parfois
 
 Permissions :
-```
+```cpp
 READ ONLY
 ```
 
@@ -258,13 +258,13 @@ Notre futur loader devra refaire cela lui-même.
 ### Les Relocations : déplacer le programme
 
 Supposons que le binaire souhaite être chargé ici :
-```
+```cpp
 0x140000000
 ```
 Mais cette zone mémoire est déjà occupée.
 
 Windows le charge ailleurs :
-```
+```cpp
 0x7FF600000000
 ```
 Certaines adresses codées en dur deviennent fausses.
@@ -430,7 +430,7 @@ Le loader pourra inclure directement ce fichier :
 #### Résultat final
 
 Nous passons donc de par exemple:
-```
+```cpp
 calc.exe
 ```
 à :
@@ -701,7 +701,7 @@ Elle contient simplement :
 importByName->Name
 ```
 Exemple :
-```
+```cpp
 "CreateFileA"
 "VirtualAlloc"
 "MessageBoxA"
@@ -781,7 +781,7 @@ Contrairement à une idée simple, un programme Windows ne démarre pas directem
 
 Le flux réel est :
 
-```
+```cpp
 EntryPoint -> runtime C/C++ -> mainCRTStartup -> main()
 ```
 
@@ -795,7 +795,7 @@ Dans un loader manuel, le rôle final est simplement de :
 * il s’exécute comme s’il avait été lancé normalement
 
 #### Résumé du pipeline complet
-```
+```cpp
 Loader -> reconstruction -> imports -> relocations -> EntryPoint -> programme
 ```
 
@@ -827,7 +827,7 @@ Ce calcul produit une empreinte « numérique » de l’image chargée.
 
 #### Pourquoi CRC32 ?
 **CRC32** signifie :
-```
+```cpp
 Cyclic Redundancy Check 32 bits
 ```
 C’est un algorithme très rapide qui transforme un bloc mémoire en une valeur de **32 bits**.
