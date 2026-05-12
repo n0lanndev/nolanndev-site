@@ -10,10 +10,10 @@
         
         <item>
             <title>Construire un Packer &amp; Loader PE de A à Z</title>
-            <link>https://nolanndev.fr/posts/packer/packer/</link>
+            <link>https://nolanndev.fr/posts/packer/create-packer/</link>
             <pubDate>Tue, 12 May 2026 00:00:00 +0000</pubDate>
             
-            <guid>https://nolanndev.fr/posts/packer/packer/</guid>
+            <guid>https://nolanndev.fr/posts/packer/create-packer/</guid>
             <description>&lt;p&gt;Bienvenue dans ce guide. Nous allons apprendre à créer un Packer, un outil capable de chiffrer un programme Windows (.exe) et de le charger directement en mémoire sans qu&amp;rsquo;il ne touche jamais le disque.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Note : Ce contenu est à but purement éducatif. Voir l&amp;rsquo;avertissement complet en &lt;a href=&#34;#disclaimer&#34;&gt;fin d&amp;rsquo;article&lt;/a&gt;.&lt;/p&gt;
