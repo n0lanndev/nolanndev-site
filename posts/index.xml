@@ -84,7 +84,7 @@ Source : <a href="https://onlyf8.com/pe-format">https://onlyf8.com/pe-format</a>
 <pre tabindex="0"><code>PE\0\0
 </code></pre><p>C&rsquo;est la signature officielle du format Portable Executable.</p>
 <p>Ensuite viennent plusieurs champs importants :</p>
-<h3 id="machine">Machine</h3>
+<h4 id="machine">Machine</h4>
 <p>Malgré son nom, ce champ ne désigne pas &ldquo;l’ordinateur&rdquo;, mais
 l’architecture processeur visée par le binaire.</p>
 <ul>
@@ -92,16 +92,16 @@ l’architecture processeur visée par le binaire.</p>
 <li><strong>0x8664</strong>  -&gt; x64</li>
 <li><strong>0xAA64</strong>  -&gt; ARM64</li>
 </ul>
-<h3 id="numberofsections">NumberOfSections</h3>
+<h4 id="numberofsections">NumberOfSections</h4>
 <p>Nombre de sections présentes (.text, .data, etc.)</p>
-<h3 id="sizeofoptionalheader">SizeOfOptionalHeader</h3>
+<h4 id="sizeofoptionalheader">SizeOfOptionalHeader</h4>
 <p>Taille, en octets, du header suivant :</p>
 <pre tabindex="0"><code>IMAGE_OPTIONAL_HEADER
 </code></pre><p>Ce champ permet à Windows de savoir où commence la table des sections juste après.</p>
 <p>Valeurs classiques :</p>
 <pre tabindex="0"><code>0xE0 -&gt; PE32
 0xF0 -&gt; PE32+ (x64)
-</code></pre><h3 id="characteristics">Characteristics</h3>
+</code></pre><h4 id="characteristics">Characteristics</h4>
 <p>Champ de flags décrivant la nature du fichier.</p>
 <p>Exemples :</p>
 <ul>
@@ -782,6 +782,7 @@ On boucle tant qu’il y a des DLL :</p>
 <li><strong>Responsabilité</strong> : L&rsquo;auteur décline toute responsabilité en cas de mauvaise utilisation de ces informations ou de dommages causés par une utilisation en dehors d&rsquo;un cadre légal et éthique.</li>
 <li><strong>Éthique</strong> : Le savoir est une arme ; utilisez-la pour construire des systèmes plus sûrs, pas pour nuire.</li>
 </ul>
+<p>nolanndev</p>
 ]]></content>
         </item>
         

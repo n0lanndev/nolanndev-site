@@ -145,15 +145,7 @@ Get the part of the private key visible: The first step of the challenge is to r
                     <hr />
                     <aside id="toc">
                     <div class="toc-title">Table of Contents</div>
-                        <nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
+                        <nav id="TableOfContents"></nav>
                     </aside>
                     <hr />
                 
@@ -163,7 +155,7 @@ Get the part of the private key visible: The first step of the challenge is to r
 <p>This writeup is about the Midnight Sun CTF frank challenge on how to recover a full RSA private key, when half of it is erased. Thanks to <a href="https://blog.cryptohack.org/twitter-secrets">this recent cryptohack write-up</a> from which this challenge is (for me) inspired.
 Challenge therefore requires recovering the entire RSA key from this image:</p>
 <p><img src="/img/recovering-rsa/rsa.png" alt="image"></p>
-<h4 id="get-the-part-of-the-private-key-visible">Get the part of the private key visible:</h4>
+<h1 id="get-the-part-of-the-private-key-visible">Get the part of the private key visible:</h1>
 <p>The first step of the challenge is to <strong>recover the visible part</strong>, to do this I quickly created a small <strong>OCR</strong> script with the <strong>pytesseract</strong> module in Python, to facilitate the recovery task.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> pytesseract
 </span></span><span style="display:flex;"><span>
@@ -305,7 +297,7 @@ a1dc30fdeccf8566acd4aa5235a7515bdcda4a85ab5f63b620b7667ac3bec1f8e322f13eab22978b
 51e6910998209fa2333c8154463056fb20773d1e9d57949a5e3e1d4ec96405cb069ab89067604b08cf60
 36d9c329e1fad8fee9d9c5e5912bcdab37877e8d2626c9ff4d097c0af665eeabfa578e56815ea201ebe9
 f7b300c51905fbdf688f046bbd8836e1b10eaf76844102da9c1e60932c1d9da9786b9ef51230c512
-</code></pre><h4 id="look-at-the-parts-we-have">Look at the parts we have</h4>
+</code></pre><h1 id="look-at-the-parts-we-have">Look at the parts we have</h1>
 <p>After being interested on how a private rsa key was created, we can notice a particular structure: <em>n, e, d, p, q, d mod(p-1), d mod(q-1) and q^-1 mod p</em>.</p>
 <pre tabindex="0"><code class="language-raw" data-lang="raw">PrivateKeyInfo ::= SEQUENCE {
    version Version,
@@ -343,7 +335,7 @@ All =&gt; d mod (p-1) = dp<br>
 All =&gt; d mod (q-1) = dq<br>
 All =&gt; (inverse of q) mod p</p>
 </blockquote>
-<h4 id="recup-key-public-to-get-n-and-e">Recup key-public to get n and e:</h4>
+<h1 id="recup-key-public-to-get-n-and-e">Recup key-public to get n and e:</h1>
 <p>We also have <em>access</em> to another <strong>authorized_keys file</strong> which contains the public keys <strong>n</strong> and <strong>e</strong>, so we can get them very easily with <strong>cat</strong>:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC/okaokb6dLlO889ktcFKuAzLbvCcy5Il2TiVIVzzibe+9FfH2W0RHtQ5A3aIvjbZKneQxgy9EiN+U28DOp9yBW4zAg11U77VtuF528Wp5ApwwN8SUD5YPBQssh3CFm6bKqg+O9F93J+/whzA8QGL8C2EYrN/BpOUSJKds0Az6cYYm3sqER+iQ64RDa9K2TrO5gfP/iyBTOydPD0ZNLbvsPMNk6YzuND+pjRGwtH9vxV5g0H1Pak1k+tXrcUSgpgnNkJ5Gptm5CgC0qF5yxR/+DMy/dOAc7jUhIZMeX1sWTd9rTSuQMAB/w3fONe6yXNBxaAavi5w3o1Cu7xgTUOYBUnAYaX+07AqTqu9PTrSpK08bZrnLf3oItdAUMsNStI4DiqxbdYX6TcccqdYLI7Cb3HdbBNRuMy3l25ZelSRyDaFT7ZXnMsGCbcWg3UnEbGCudAMHzU5aFLDYZJUpQsgYQblSw9EF7R/OLa8uy57CBGaqoM0wtU56A2sOPTGVbDVF2HmObg6rijqn4I6NBQsBeshANIil/amw08MJZVVK7jNYDLret23ky/uSyO/IRdp0KcByWk7vEW36J2itQOkRhKBVAgPIO3Vudez85TYoRb8ESAZ4OJtrBMP0l66lnXc5+L9keckKLZp24DNkb95ULd2g/7/jqFtv6gzFamb93w<span style="color:#f92672">==</span> u@eniac
@@ -373,7 +365,7 @@ RSA Public Key [6b:b1:23:93:9f:b6:83:23:3e:7b:fb:d0:14:eb:d7:1f:f8:df:46:53]
 bfa246a891be9d2e53bcf3d92d7052ae0332dbbc2732e489764e2548573ce26defbd15f1f65b4447b50e40dda22f8db64a9de431832f4488df94dbc0cea7dc815b8cc0835d54efb56db85e76f16a79029c3037c4940f960f050b2c8770859ba6caaa0f8ef45f7727eff087303c4062fc0b6118acdfc1a4e51224a76cd00cfa718626deca8447e890eb84436bd2b64eb3b981f3ff8b20533b274f0f464d2dbbec3cc364e98cee343fa98d11b0b47f6fc55e60d07d4f6a4d64fad5eb7144a0a609cd909e46a6d9b90a00b4a85e72c51ffe0cccbf74e01cee352121931e5f5b164ddf6b4d2b9030007fc377ce35eeb25cd0716806af8b9c37a350aeef181350e601527018697fb4ec0a93aaef4f4eb4a92b4f1b66b9cb7f7a08b5d01432c352b48e038aac5b7585fa4dc71ca9d60b23b09bdc775b04d46e332de5db965e9524720da153ed95e732c1826dc5a0dd49c46c60ae740307cd4e5a14b0d864952942c81841b952c3d105ed1fce2daf2ecb9ec20466aaa0cd30b54e7a036b0e3d31956c3545d8798e6e0eab8a3aa7e08e8d050b017ac8403488a5fda9b0d3c30965554aee33580cbadeb76de4cbfb92c8efc845da7429c0725a4eef116dfa2768ad40e91184a0550203c83b756e75ecfce5362845bf04480678389b6b04c3f497aea59d7739f8bf6479c90a2d9a76e033646fde542ddda0ffbfe3a85b6fea0cc56a66fddf
 
 public exponent: 10001
-</code></pre><h4 id="recup-q-and-p">Recup q and p:</h4>
+</code></pre><h1 id="recup-q-and-p">Recup q and p:</h1>
 <p>With some math formulas we can succeed in expressing <strong>p</strong> and <strong>q</strong> according to what we have, with <strong>kp</strong> and <strong>kq</strong> our only strangers:</p>
 <pre tabindex="0"><code class="language-raw" data-lang="raw">p = (e*dp-1)/kp + 1   and q = (e*dq-1)/kq + 1
 </code></pre><p>Perfect, you just have to make a script to recover its <strong>p</strong> and <strong>q</strong> potentials by trying to bruteforce <strong>kp</strong> and <strong>kq</strong>:</p>
@@ -482,7 +474,7 @@ XqIB6+n3swDFGQX732iPBGu9iDbhsQ6vdoRBAtqcHmCTLB2dqXhrnvUSMMUS
 </span></span><span style="display:flex;"><span>&gt;&gt; ssh -i final_key.pem -p <span style="color:#ae81ff">2222</span> frank@backup-01.play.midnightsunctf.se
 </span></span></code></pre></div><p>And the ssh server returns: <strong>midnight{D0_n07_s0w_p4r75_0f_y0ur_pr1v473}</strong>.
 ;)</p>
-<h4 id="nolanndev">nolanndev</h4>
+<p>nolanndev</p>
 
                 </div>
             </article>
