@@ -88,7 +88,7 @@ C'est la signature officielle du format Portable Executable.
 
 Ensuite viennent plusieurs champs importants :
 
-### Machine
+#### Machine
 
 Malgré son nom, ce champ ne désigne pas "l’ordinateur", mais
 l’architecture processeur visée par le binaire.
@@ -97,11 +97,11 @@ l’architecture processeur visée par le binaire.
 - **0x8664**  -> x64
 - **0xAA64**  -> ARM64
 
-### NumberOfSections
+#### NumberOfSections
 
 Nombre de sections présentes (.text, .data, etc.)
 
-### SizeOfOptionalHeader
+#### SizeOfOptionalHeader
 
 Taille, en octets, du header suivant :
 
@@ -118,7 +118,7 @@ Valeurs classiques :
 0xF0 -> PE32+ (x64)
 ```
 
-### Characteristics
+#### Characteristics
 
 Champ de flags décrivant la nature du fichier.
 
@@ -996,3 +996,5 @@ Ce cours est partagé à des fins strictement éducatives et dans un but de rech
 * **Usage responsable** : Ne testez jamais ces concepts sur un ordinateur ou un réseau qui ne vous appartient pas.
 * **Responsabilité** : L'auteur décline toute responsabilité en cas de mauvaise utilisation de ces informations ou de dommages causés par une utilisation en dehors d'un cadre légal et éthique.
 * **Éthique** : Le savoir est une arme ; utilisez-la pour construire des systèmes plus sûrs, pas pour nuire.
+
+nolanndev

@@ -13,7 +13,7 @@ Challenge therefore requires recovering the entire RSA key from this image:
 
 ![image](/img/recovering-rsa/rsa.png)
 
-#### Get the part of the private key visible:
+# Get the part of the private key visible:
 
 The first step of the challenge is to **recover the visible part**, to do this I quickly created a small **OCR** script with the **pytesseract** module in Python, to facilitate the recovery task.
 
@@ -176,7 +176,7 @@ a1dc30fdeccf8566acd4aa5235a7515bdcda4a85ab5f63b620b7667ac3bec1f8e322f13eab22978b
 f7b300c51905fbdf688f046bbd8836e1b10eaf76844102da9c1e60932c1d9da9786b9ef51230c512
 ```
 
-#### Look at the parts we have  
+# Look at the parts we have  
 
 After being interested on how a private rsa key was created, we can notice a particular structure: *n, e, d, p, q, d mod(p-1), d mod(q-1) and q^-1 mod p*.
 
@@ -222,7 +222,7 @@ So we now know that we have:
 >All => d mod (q-1) = dq  
 >All => (inverse of q) mod p  
 
-#### Recup key-public to get n and e:  
+# Recup key-public to get n and e:  
 
 We also have *access* to another **authorized_keys file** which contains the public keys **n** and **e**, so we can get them very easily with **cat**:  
 
@@ -267,7 +267,7 @@ bfa246a891be9d2e53bcf3d92d7052ae0332dbbc2732e489764e2548573ce26defbd15f1f65b4447
 public exponent: 10001
 ```
 
-#### Recup q and p:
+# Recup q and p:
 
 With some math formulas we can succeed in expressing **p** and **q** according to what we have, with **kp** and **kq** our only strangers:  
 
@@ -413,4 +413,4 @@ Now we just have to send a **request** to the ssh server with this authenticatio
 And the ssh server returns: **midnight{D0_n07_s0w_p4r75_0f_y0ur_pr1v473}**.
 ;)    
 
-#### nolanndev
+nolanndev
