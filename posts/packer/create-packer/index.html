@@ -256,11 +256,13 @@ Source : <a href="https://onlyf8.com/pe-format">https://onlyf8.com/pe-format</a>
 </ol>
 <h3 id="anatomie-dun-fichier-pe">Anatomie d&rsquo;un fichier PE</h3>
 <p>L&rsquo;image montre qu&rsquo;un exécutable Windows est divisé en plusieurs blocs logiques :</p>
-<p><strong>Headers</strong> : métadonnées décrivant le programme
-<strong>Sections</strong> : contenu réel (code, données, ressources&hellip;)
-<strong>Imports</strong> : fonctions externes utilisées
-<strong>Relocations</strong> : ajustements d&rsquo;adresses mémoire
-<strong>Entry Point</strong> : première instruction exécutée</p>
+<ul>
+<li><strong>Headers</strong> : métadonnées décrivant le programme</li>
+<li><strong>Sections</strong> : contenu réel (code, données, ressources&hellip;)</li>
+<li><strong>Imports</strong> : fonctions externes utilisées</li>
+<li><strong>Relocations</strong> : ajustements d&rsquo;adresses mémoire</li>
+<li><strong>Entry Point</strong> : première instruction exécutée</li>
+</ul>
 <p>Voyons cela proprement.</p>
 <h3 id="1-le-dos-header-">1. Le DOS Header :</h3>
 <p>Tout fichier PE commence par deux octets célèbres :</p>
