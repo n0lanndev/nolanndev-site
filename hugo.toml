@@ -6,7 +6,7 @@ paginate = 10
 
 [params]
   # Config visuelle
-  homeSubtitle = "C++ Developer | Game Dev | DevSecOps & Security"
+  homeSubtitle = "C++ & Rust Developer | DevSecOps & Security | Game Dev "
   primaryColor = "purple"
   mode = "dark"
 
@@ -28,7 +28,7 @@ paginate = 10
 
 [[menu.main]]
   identifier = "lab"
-  name       = "Lab (C++ & Tutos)"
+  name       = "Lab (C++ / Rust & Tutos)"
   url        = "/posts/"
   weight     = 10
 
