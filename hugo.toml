@@ -1,6 +1,6 @@
 baseURL = 'https://nolanndev.fr'
 languageCode = 'fr-fr'
-title = 'nolanndev | C++ & DevSecOps'
+title = 'nolanndev | C++ & Rust & DevSecOps'
 theme = "hello-friend-ng"
 paginate = 10
 
