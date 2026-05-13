@@ -1,12 +1,12 @@
 baseURL = 'https://nolanndev.fr'
 languageCode = 'fr-fr'
-title = 'nolanndev | C++ & Rust & DevSecOps'
+title = 'nolanndev | C++ / Rust & DevSecOps'
 theme = "hello-friend-ng"
 paginate = 10
 
 [params]
   # Config visuelle
-  homeSubtitle = "C++ & Rust Developer | DevSecOps & Security | Game Dev "
+  homeSubtitle = "C++ / Rust Developer | DevSecOps & Security | Game Dev "
   primaryColor = "purple"
   mode = "dark"
 
